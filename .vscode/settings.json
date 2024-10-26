@@ -1,0 +1,41 @@
+{
+    "window.zoomLevel": 2,
+    "editor.rulers": [100],
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+
+    "files.encoding": "utf8",
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.wordWrapColumn": 80,
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        },
+        "files.trimTrailingWhitespace": false
+    },
+
+    "json.schemas": [
+        {
+            "fileMatch": ["*.tmGrammar.json"],
+            "url": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json"
+        }
+    ],
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": "*.tmGrammar.yml"
+    },
+    "cSpell.words": [
+    ]
+}

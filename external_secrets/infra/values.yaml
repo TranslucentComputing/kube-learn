@@ -1,0 +1,75 @@
+image:
+  repository: ghcr.io/external-secrets/external-secrets
+  tag: "main"
+concurrent: 1
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+  # maxUnavailable: 1
+revisionHistoryLimit: 10
+installCRDs: false
+crds:
+  createClusterExternalSecret: true
+  createClusterSecretStore: true
+  createPushSecret: true
+  annotations: {}
+  conversion:
+    enabled: true
+commonLabels: {}
+leaderElect: false
+controllerClass: ""
+extendedMetricLabels: false
+scopedNamespace: ""
+scopedRBAC: false
+serviceAccount:
+  create: true
+  automount: true
+rbac:
+  create: true
+  servicebindings:
+    create: true
+processClusterExternalSecret: true
+processClusterStore: true
+processPushSecret: true
+createOperator: true
+podSecurityContext: {}
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+  seccompProfile:
+    type: RuntimeDefault
+webhook:
+  create: true
+  image:
+    repository: ghcr.io/external-secrets/external-secrets
+    tag: "main"
+  certCheckInterval: "5m"
+  lookaheadInterval: ""
+  podDisruptionBudget:
+    enabled: false
+    minAvailable: 1
+  revisionHistoryLimit: 10
+  certDir: /tmp/certs
+  failurePolicy: Fail
+  port: 10250
+  certManager:
+    enabled: true
+    addInjectorAnnotations: true
+  podSecurityContext: {}
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000
+    seccompProfile:
+      type: RuntimeDefault
+certController:
+  create: false
