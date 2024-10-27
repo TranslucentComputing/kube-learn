@@ -1,5 +1,8 @@
 /**
  * Vault Dynamic Secret Generators for Kubernetes External Secrets
+ * This file defines custom resources for generating dynamic secrets in Kubernetes,
+ * using Vault as the backend. These resources allow for secure, automated retrieval
+ * and rotation of secrets such as TLS certificates and database credentials.
  */
 
 # Dynamic secret generator for database SSO certificates

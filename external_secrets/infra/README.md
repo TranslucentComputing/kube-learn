@@ -1,3 +1,30 @@
+# External Secrets Infra
+
+This directory contains the Terraform configurations and related resources to deploy the External Secrets tool within a Kubernetes environment. This deployment allows for securely managing and synchronizing external secrets from various backends into Kubernetes.
+
+## Structure and Purpose
+
+- **data.tf**:
+  - Configures data sources to retrieve information required for the deployment, including Google Cloud service account access tokens and GKE cluster details.
+  - Retrieves the Terraform remote state for the GKE cluster, which is necessary for configuring access to the Kubernetes environment.
+
+- **main.tf**:
+  - Defines the main resources for deploying External Secrets, including certificate management and Helm charts.
+  - Configures components like the Core Controller and Validating Webhook to manage and validate secrets within Kubernetes securely.
+
+- **metrics.tf**:
+  - Sets up metrics configuration for monitoring External Secrets, integrating with Prometheus if enabled.
+  - Exposes metrics through a `ServiceMonitor` for observability.
+
+- **values.yaml**:
+  - Contains Helm values for configuring External Secrets. It defines settings such as replica counts, resource requests/limits, and other customizable parameters for the Helm release.
+
+- **variables.tf**:
+  - Defines input variables used across the configuration files to make the deployment flexible and configurable based on environment-specific settings.
+
+- **dashboard/main.json**:
+  - A JSON file representing the Grafana dashboard for monitoring External Secrets. This dashboard provides insights into the performance, health, and usage of External Secrets within the Kubernetes cluster.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 

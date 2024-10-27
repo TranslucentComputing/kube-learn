@@ -44,24 +44,16 @@ locals {
     password_key = "db-password"
   }
 
-  # Keycloak admin credentials key, retrieved from the Vault Terraform state
+  # Key mappings for other application-specific secrets.
   kv_keycloak_admin_cred = data.terraform_remote_state.vault_config.outputs.kv_keycloak_admin_cred
-  # Grafana admin credentials key, retrieved from the Vault Terraform state
   kv_grafana_admin_cred = data.terraform_remote_state.vault_config.outputs.kv_grafana_admin_cred
-  # KV vault path to lobechat openai api key
   kv_lobechat_openai_api_key = data.terraform_remote_state.vault_config.outputs.kv_path_lobechat_openai_key
-  # KV vault path to lobechat anthropic api key
   kv_lobechat_anthropic_api_key = data.terraform_remote_state.vault_config.outputs.kv_lobechat_anthropic_api_key
-  # KV vault path to lobechat access key
   kv_lobechat_access_key = data.terraform_remote_state.vault_config.outputs.kv_lobechat_admin_cred
 
-  # KV vault path to alertmanager client credentials
   alertmanager_secret_path = try(data.terraform_remote_state.kc_man[0].outputs.client_alertmanager_vault_kv_path,null)
-  # KV vault path to opencost client credentials
   opencost_secret_path = try(data.terraform_remote_state.kc_man[0].outputs.client_opencost_vault_kv_path,null)
-  # KV vault path to lobechat client credentials
   lobechat_secret_path = try(data.terraform_remote_state.kc_man[0].outputs.client_lobechat_vault_kv_path,null)
-  # KV vault path to ollama client credentials
   ollama_secret_path = try(data.terraform_remote_state.kc_man[0].outputs.client_ollama_vault_kv_path,null)
 }
 

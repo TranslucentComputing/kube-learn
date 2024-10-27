@@ -1,3 +1,30 @@
+# External Secrets Management Infra
+
+This directory provides the Terraform configurations for managing the secret storage backend configuration, using Vault as the provider. It sets up `SecretStore` resources in multiple namespaces to facilitate secure access to external secrets across different services within Kubernetes.
+
+## Structure and Purpose
+
+- **data.tf**: 
+  - Defines data sources that retrieve information and state for Vault, GKE, SSO database, and Keycloak.
+  - Configures access to multiple Terraform states for GKE and Vault to ensure that secrets are securely managed and accessible in the Kubernetes environment.
+
+- **generator.tf**:
+  - Configures custom resources to generate dynamic secrets in Kubernetes, using Vault as the backend.
+
+- **main.tf**:
+  - This file defines resources for managing external secrets in Kubernetes with Vault as the backend. It leverages both dynamic and static secret retrieval for different services.
+
+- **outputs.tf**:
+  - Defines output values to expose essential information about the deployment. This allows other modules or services to reference key configurations, such as URLs, secrets paths, and role names.
+
+- **store.tf**:
+  - Configures `SecretStore` resources across various namespaces to connect Kubernetes with Vault securely. 
+  - The configuration ensures that each namespace can access Vault secrets specific to its services, using Kubernetes-native authentication and TLS.
+
+- **variables.tf**:
+  - Defines input variables for configuring various parameters in the deployment, including Vault paths, service accounts, and resource limits.
+
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 

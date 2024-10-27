@@ -1,9 +1,11 @@
 /**
- * SecretStore Configuration for External Secrets in Kubernetes with Vault Backend
+ * SecretStore Configuration for External Secrets in Kubernetes with Vault Backend.
+ * This file defines a `SecretStore` resource for each namespace where external secrets
+ * need to be accessed securely from Vault.
  */
 
 locals {
-  // Create a list of namespaces dynamically
+  // Dynamically create a list of namespaces where the SecretStore will be deployed.
   namespaces = [
     local.namespace_security,
     local.namespace_observability,
@@ -11,7 +13,9 @@ locals {
     local.namespace_assistant
   ]
 
-  // Define a common spec for the SecretStore
+  // Define a common Vault backend configuration to be used for all SecretStores.
+  // This specification configures the Vault provider, specifying connection details,
+  // TLS certificate references, and authentication settings.
   vault_spec = {
     "provider" = {
       "vault" = {
@@ -44,6 +48,8 @@ locals {
   }
 }
 
+# Define a `SecretStore` resource for each specified namespace.
+# This configuration allows each namespace to access secrets stored in Vault.
 resource "kubernetes_manifest" "vault_secret_store" {
   for_each = toset(local.namespaces)
 

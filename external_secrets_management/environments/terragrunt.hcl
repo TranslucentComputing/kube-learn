@@ -1,13 +1,17 @@
 # TERRAGRUNT CONFIGURATION
 #
-# Global configuration for all the environments
+# Global configuration for all environments in external secrets management.
+# This file provides foundational settings and configurations that are shared
+# across different environments, such as remote state, provider settings,
+# and Terraform version constraints.
 
 
 locals {
-  # Automatically load environment-level variables
+  # Load environment-level variables from env.hcl in a parent directory.
+  # These variables contain project-specific details for the Google Cloud setup.
   environment_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
 
-  # Unpack variables for easy access
+  # Unpack and define local variables for easy access in this configuration.
   project_id                  = local.environment_vars.locals.project_id
   region                      = local.environment_vars.locals.region
   zone1                       = local.environment_vars.locals.zone1
@@ -21,7 +25,9 @@ locals {
 }
 
 
-# Configure Terragrunt to automatically store tfstate files in an GCS bucket.
+# Configure remote state management using Google Cloud Storage (GCS).
+# This setup stores Terraform state files remotely in a GCS bucket, allowing for
+# centralized state management and collaboration across team members.
 remote_state {
   backend = "gcs"
   generate = {
@@ -38,7 +44,8 @@ remote_state {
   }
 }
 
-# Generate Terraform and Provider versions
+# Generate a Terraform version file specifying required providers and versions.
+# This configuration ensures compatibility by enforcing specific provider versions.
 generate "versions" {
   path      = "versions.tf"
   if_exists = "overwrite_terragrunt"
@@ -64,7 +71,9 @@ terraform {
 EOF
 }
 
-# Generate providers
+# Generate provider configurations for Google and Kubernetes.
+# This includes settings for the Google provider (both standard and beta)
+# and the Kubernetes provider for interacting with the GKE cluster.
 generate "provider" {
   path = "provider.tf"
   if_exists = "overwrite_terragrunt"
