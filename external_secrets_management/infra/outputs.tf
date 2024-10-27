@@ -1,7 +1,5 @@
 /**
  * Outputs for external secrets configuration.
- *
- * Copyright 2024 Translucent Computing Inc.
  */
 
 output "database_sso_tls_secret_name" {
@@ -57,11 +55,6 @@ output "opencost_secret_name" {
 output "keycloak_metrics_database_secret_keys" {
   value       = local.database_sso_metrics_data_keys
   description = "Secret key names for the database keycloak metrics secret."
-}
-
-output "headlamp_secret_name" {
-  value       = var.headlamp_secret_name
-  description = "Headlamp KC client secret name."
 }
 
 output "lobechat_secret_name" {

@@ -1,7 +1,5 @@
 /**
  * Data resource for external secrets configuration.
- *
- * Copyright 2024 Translucent Computing Inc.
  */
 
 # Retrieve access token

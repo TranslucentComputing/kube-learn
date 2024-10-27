@@ -3,8 +3,6 @@
 # This script safely stops an SSH tunnel/proxy to a Bastion host.
 # It searches for an active SSH tunnel on a specified port (default 8888)
 # and attempts to terminate it gracefully, with a force-stop as a fallback.
-#
-# Copyright © 2023 Translucent Computing Inc.
 
 # Safety settings: exit on error, treat unset variables as an error,
 # and make pipelines fail on first error

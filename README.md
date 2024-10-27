@@ -12,6 +12,26 @@ This project serves as a **blueprint** for a production-ready setup but may not 
 - **Manage Real-World Constraints**: Be prepared to adjust deployments in response to performance requirements, fault tolerance, and scalability.
 - **Monitoring and Observability**: Integrate monitoring tools to ensure that deployments are reliable and meet operational expectations.
 
+## Google Service Account Impersonation
+
+### Why We Use Service Account Impersonation
+
+Service account impersonation allows us to grant temporary, scoped permissions for specific actions without sharing or managing multiple long-lived keys. In a production environment, service account impersonation provides these benefits:
+
+- **Improved Security**: Reduces exposure of sensitive credentials by limiting access based on specific roles and actions.
+- **Granular Control**: Allows for fine-grained access policies, enabling specific actions without giving broad permissions.
+- **Keyless Authentication**: Avoids managing long-lived JSON key files, reducing the risk of compromised credentials and making it easier to comply with security policies.
+
+### How Service Account Impersonation Is Implemented
+
+1. **Defining the Service Account**: We specify a dedicated Google service account in the `env.hcl` file (referenced as `service_account` in Terragrunt). This service account has the necessary roles to deploy and manage resources within the Google Cloud Project.
+
+2. **Using `impersonate_service_account` in Terragrunt**: In our Terragrunt configuration, we use the `impersonate_service_account` parameter to enable impersonation. This is set in the `remote_state` and provider configurations, allowing Terragrunt and Terraform to act as this service account for the deployment.
+
+3. **Dynamic Authentication in Terraform Providers**: The impersonated service account is used to configure Google, Kubernetes, and Helm providers, ensuring that all actions Terraform takes in Google Cloud are performed under this account’s identity, granting access only to specific environments or resources as needed.
+
+This setup ensures secure, manageable, and scalable access to Google Cloud resources, aligning with best practices for production deployments in cloud environments.
+
 ## Getting Started
 
 ### Prerequisites

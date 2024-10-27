@@ -1,7 +1,5 @@
 /**
  * SecretStore Configuration for External Secrets in Kubernetes with Vault Backend
- *
- * Copyright 2024 Translucent Computing Inc.
  */
 
 locals {

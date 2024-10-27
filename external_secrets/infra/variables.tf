@@ -1,7 +1,5 @@
 /**
  * Variables for external secrets deployment.
- *
- * Copyright 2024 Translucent Computing Inc.
  */
 
 variable "impersonate_account" {

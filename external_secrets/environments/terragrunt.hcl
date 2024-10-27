@@ -1,15 +1,13 @@
 # TERRAGRUNT CONFIGURATION
 #
 # Global configuration for all the environments
-#
-# Copyright 2023 Translucent Computing Inc.
-
 
 locals {
-  # Automatically load environment-level variables
+  # Load environment-level variables from env.hcl, found in a parent directory.
+  # These variables set project-level information such as GCP project ID, region, and versions.
   environment_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
 
-  # Unpack variables for easy access
+  # Extract and assign environment variables for easier access in this configuration.
   project_id                  = local.environment_vars.locals.project_id
   region                      = local.environment_vars.locals.region
   zone1                       = local.environment_vars.locals.zone1
@@ -24,7 +22,9 @@ locals {
 }
 
 
-# Configure Terragrunt to automatically store tfstate files in an GCS bucket.
+# Configure Terragrunt to store Terraform state files in a Google Cloud Storage (GCS) bucket.
+# This setup enables remote state management and collaboration by keeping the state files
+# outside the local file system.
 remote_state {
   backend = "gcs"
   generate = {
@@ -41,7 +41,7 @@ remote_state {
   }
 }
 
-# Generate Terraform and Provider versions
+# Generate a Terraform version file with required provider versions
 generate "versions" {
   path      = "versions.tf"
   if_exists = "overwrite_terragrunt"
@@ -71,7 +71,9 @@ terraform {
 EOF
 }
 
-# Generate providers
+# Generate the provider configuration file
+# This sets up connections for Google, Helm, and Kubernetes providers using values
+# from local variables and the GCP service account.
 generate "provider" {
   path = "provider.tf"
   if_exists = "overwrite_terragrunt"

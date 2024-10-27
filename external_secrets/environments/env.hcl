@@ -4,23 +4,23 @@
 
 locals {
   # GCP config
-  project_id="tcinc-dev"
-  region="northamerica-northeast2"
-  short_region="na-ne2"
-  zone1="northamerica-northeast2-a"
-  short_zone1="na-ne2-a"
+  project_id        = "change-me"                    # Replace with your actual GCP project ID
+  region            = "change-me"                    # Replace with the target region (e.g., "northamerica-northeast2")
+  short_region      = "change-me"                    # Short region identifier (e.g., "na-ne2")
+  zone1             = "change-me"                    # Availability zone (e.g., "northamerica-northeast2-a")
+  short_zone1       = "change-me"                    # Short zone identifier (e.g., "na-ne2-a")
 
   # Service Account to be impersonated
-  service_account="tc-tekstack-kps-priv-gke-sa@tcinc-dev.iam.gserviceaccount.com"
+  service_account   = "change-me@change-me.iam.gserviceaccount.com"  # Replace with your service account email
 
   # Variables to create GCS Bucket within GCP
-  bucket_name="tc-tekstack-kps-terraform-state-bucket"
+  bucket_name       = "change-me"                    # Replace with your GCS bucket name for Terraform state
 
   # Terraform Version
-  terraform_version = ">=1.6"
+  terraform_version = ">=1.6"                        # Specify minimum Terraform version (if needed)
 
-  # Provider Version
-  provider_google_version     = "5.10.0"
-  provider_kubernetes_version = "2.24.0"
-  provider_helm_version       = "2.12.1"
+  # Provider Versions
+  provider_google_version     = "5.10.0"             # Google provider version
+  provider_kubernetes_version = "2.24.0"             # Kubernetes provider version
+  provider_helm_version       = "2.12.1"             # Helm provider version
 }

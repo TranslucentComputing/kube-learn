@@ -1,7 +1,5 @@
 /**
  * Vault Dynamic Secret Generators for Kubernetes External Secrets
- *
- * Copyright 2024 Translucent Computing Inc.
  */
 
 # Dynamic secret generator for database SSO certificates

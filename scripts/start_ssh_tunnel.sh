@@ -3,8 +3,6 @@
 # This script is designed to establish an SSH tunnel/proxy to a Bastion host.
 # It retrieves the SSH command from a Terraform state file stored in a GCS bucket.
 # If an SSH tunnel is not already running, it starts a new one.
-#
-# Copyright © 2023 Translucent Computing Inc.
 
 # Safety settings: exit on error, treat unset variables as an error,
 # and make pipelines fail on first error

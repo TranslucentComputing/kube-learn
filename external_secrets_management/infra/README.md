@@ -26,12 +26,10 @@
 | grafana\_admin\_secret\_password\_key | Grafana admin password secret key. | `string` | n/a | yes |
 | grafana\_admin\_secret\_user\_key | Grafana admin username secret key. | `string` | n/a | yes |
 | grafana\_admin\_secret\_user\_value | Grafana admin username. | `string` | n/a | yes |
-| headlamp\_secret\_name | Name of Headlamp secret | `string` | n/a | yes |
 | impersonate\_account | The service account that TF used for Google provider. | `string` | n/a | yes |
 | ollama\_secret\_name | Name of Ollama Keycloak Client secret | `string` | n/a | yes |
 | opencost\_secret\_name | Name of OpenCost secret | `string` | n/a | yes |
 | project\_id | Project ID. | `string` | n/a | yes |
-| serpapi\_api\_key | SerpAPI API key, use for REST Google searches. | `string` | n/a | yes |
 | vault\_database\_sso\_tls\_secret\_name | Name of the secret where the Vault certificated is stored. | `string` | n/a | yes |
 | vault\_database\_sso\_tls\_ttl | The time after which this certificate will no longer be valid. | `string` | n/a | yes |
 | vault\_grafana\_admin\_secret\_name | The secret name of Kubernetes secret that contains Grafana admin user credentials. | `string` | n/a | yes |
@@ -49,7 +47,6 @@
 | grafana\_admin\_secret\_name | Name of the secret that contains Grafana user admin credentials. |
 | grafana\_admin\_secret\_password\_key | Secret key for Grafana admin password. |
 | grafana\_admin\_secret\_user\_key | Secret key for Grafana admin username. |
-| headlamp\_secret\_name | Headlamp KC client secret name. |
 | keycloak\_admin\_secret\_name | Name of the secret that contains Keycloak user admin credentials. |
 | keycloak\_database\_secret\_keys | Secret key names for the database keycloak secret. |
 | keycloak\_database\_secret\_name | Name of the secret that contains database data for Keycloak. |

@@ -1,4 +1,4 @@
-# © 2023 Translucent Computing Inc.
+# Project Makefile
 #
 # Usage:
 # - Use `make help` to list all available commands and their descriptions.
@@ -13,8 +13,8 @@ DOCKER_IMAGE_DEVELOPER_TOOLS := cft/developer-tools
 DOCKER_TAG_VERSION_DEVELOPER_TOOLS := 1.22.16
 
 # Configuration - SSH Tunnel Variables
-BUCKET_NAME := tc-tekstack-kps-terraform-state-bucket
-STATE_FILE_PATH := bastion/prod/default.tfstate
+BUCKET_NAME := "change-me"
+STATE_FILE_PATH := "change-me"
 OUTPUT_KEY := bastion_ssh_command
 TUNNEL_PORT := 8888
 

@@ -1,8 +1,6 @@
 # TERRAGRUNT CONFIGURATION
 #
 # Global configuration for all the environments
-#
-# Copyright 2023 Translucent Computing Inc.
 
 
 locals {

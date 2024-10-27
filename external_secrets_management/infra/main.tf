@@ -6,8 +6,6 @@
  *
  * External secrets are dynamically generated for database SSO and statically retrieved for Keycloak,
  * ensuring credentials are securely managed and rotated according to policies defined in Vault.
- *
- * Copyright 2024 Translucent Computing Inc.
  */
 
 locals {
@@ -63,8 +61,6 @@ locals {
   opencost_secret_path = try(data.terraform_remote_state.kc_man[0].outputs.client_opencost_vault_kv_path,null)
   # KV vault path to lobechat client credentials
   lobechat_secret_path = try(data.terraform_remote_state.kc_man[0].outputs.client_lobechat_vault_kv_path,null)
-  # KV vault path to headlamp client credentials
-  # headlamp_secret_path = try(data.terraform_remote_state.kc_man[0].outputs.client_headlamp_vault_kv_path,null)
   # KV vault path to ollama client credentials
   ollama_secret_path = try(data.terraform_remote_state.kc_man[0].outputs.client_ollama_vault_kv_path,null)
 }
@@ -321,53 +317,6 @@ resource "kubernetes_manifest" "keycloak_metrics_database_external_secret" {
   }
 }
 
-# Rolling back change for headlamp
-# # External secret for Headlamp Keycloak Client credentials
-# resource "kubernetes_manifest" "headlamp_secret" {
-#   count   = var.configure_keycloak ? 1 : 0
-#   manifest = {
-#     "apiVersion" = "external-secrets.io/v1beta1"
-#     "kind" = "ExternalSecret"
-#     "metadata" = {
-#       "name" = "headlamp-client"
-#       "namespace" = local.namespace_observability
-#     }
-#     "spec" = {
-#       "refreshInterval" = "0"
-#       "secretStoreRef" = {
-#         "name" = local.vault_secret_store_name
-#         "kind" = "SecretStore"
-#       }
-#       "target" = {
-#         "name" = var.headlamp_secret_name
-#         "template" = {
-#           "type" = "Opaque"
-#           "metadata" = {}
-#           "data" = {
-#             "clientID"     = "{{ .client_id }}",
-#             "clientSecret" = "{{ .client_secret }}",
-#             "issuerURL" = "https://${data.terraform_remote_state.kc[0].outputs.keycloak_domain}/realms/${data.terraform_remote_state.kc_man[0].outputs.keycloak_ops_realm}"
-#             "scopes" = "email,profile"
-#           }
-#         }
-#       }
-#       "data" = [{
-#         "secretKey" = "client_id"
-#         "remoteRef" = {
-#           "key" = local.headlamp_secret_path
-#           "property" = "${data.terraform_remote_state.kc_man[0].outputs.kc_client_client_id_key}"
-#         }
-#       },{
-#         "secretKey" = "client_secret"
-#         "remoteRef" = {
-#           "key" = local.headlamp_secret_path
-#           "property" = "${data.terraform_remote_state.kc_man[0].outputs.kc_client_client_secret_key}"
-#         }
-#       }]
-#     }
-#   }
-# }
-
 resource "random_id" "lobechat_random_base64" {
   byte_length = 24
 }
@@ -400,7 +349,6 @@ resource "kubernetes_manifest" "lobechat_secret" {
             "KEYCLOAK_CLIENT_ID" = "{{ .client_id }}"
             "KEYCLOAK_CLIENT_SECRET" = "{{ .client_secret }}"
             "NEXT_AUTH_SECRET" = base64encode(random_id.lobechat_random_base64.b64_std)
-            "SERPAPI_API_KEY" = var.serpapi_api_key
           }
         }
       }

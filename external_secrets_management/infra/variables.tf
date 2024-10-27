@@ -1,7 +1,5 @@
 /**
  * Variables for external secrets configuration.
- *
- * Copyright 2024 Translucent Computing Inc.
  */
 
 variable "impersonate_account" {
@@ -152,22 +150,10 @@ variable "alertmanager_secret_name" {
   type        = string
   description = "Name of Alertmanager secret"
 }
-
-variable "headlamp_secret_name" {
-  type        = string
-  description = "Name of Headlamp secret"
-}
-
 variable "vault_lobechat_secret_name" {
   description = "The secret name of Kubernetes secret that contains Lobe chat credentials."
   type        = string
 }
-
-variable "serpapi_api_key" {
-  description = "SerpAPI API key, use for REST Google searches."
-  type        = string
-}
-
 variable "opencost_secret_name" {
   type        = string
   description = "Name of OpenCost secret"
